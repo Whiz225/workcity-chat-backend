@@ -1,0 +1,37 @@
+[
+  {
+    "ID": 1,
+    "user_login": "john",
+    "user_email": "john@example.com",
+    "display_name": "John Doe",
+    "roles": ["customer"]
+  },
+  {
+    "ID": 2,
+    "user_login": "jane",
+    "user_email": "jane@example.com",
+    "display_name": "Jane Smith",
+    "roles": ["agent"]
+  },
+  {
+    "ID": 3,
+    "user_login": "mike",
+    "user_email": "mike@example.com",
+    "display_name": "Mike Johnson",
+    "roles": ["merchant"]
+  },
+  {
+    "ID": 4,
+    "user_login": "sarah",
+    "user_email": "sarah@example.com",
+    "display_name": "Sarah Williams",
+    "roles": ["designer"]
+  },
+  {
+    "ID": 5,
+    "user_login": "admin",
+    "user_email": "admin@example.com",
+    "display_name": "Admin User",
+    "roles": ["administrator"]
+  }
+]

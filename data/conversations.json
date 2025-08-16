@@ -1,0 +1,37 @@
+[
+  {
+    "_id": "conv_001",
+    "participants": ["usr_001", "usr_002"],
+    "lastMessage": "msg_015",
+    "unreadCount": 2,
+    "createdAt": "2023-10-15T09:30:00Z"
+  },
+  {
+    "_id": "conv_002",
+    "participants": ["usr_001", "usr_003"],
+    "lastMessage": "msg_016",
+    "unreadCount": 0,
+    "createdAt": "2023-10-16T11:45:00Z"
+  },
+  {
+    "_id": "conv_003",
+    "participants": ["usr_002", "usr_004"],
+    "lastMessage": "msg_017",
+    "unreadCount": 5,
+    "createdAt": "2023-10-17T14:20:00Z"
+  },
+  {
+    "_id": "conv_004",
+    "participants": ["usr_003", "usr_005"],
+    "lastMessage": "msg_018",
+    "unreadCount": 1,
+    "createdAt": "2023-10-18T10:15:00Z"
+  },
+  {
+    "_id": "conv_005",
+    "participants": ["usr_001", "usr_002", "usr_005"],
+    "lastMessage": "msg_020",
+    "unreadCount": 0,
+    "createdAt": "2023-10-19T16:30:00Z"
+  }
+]

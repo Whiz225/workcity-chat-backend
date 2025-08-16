@@ -1,0 +1,42 @@
+[
+  {
+    "_id": "usr_001",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "role": "customer",
+    "avatar": "/uploads/avatar1.jpg",
+    "online": true
+  },
+  {
+    "_id": "usr_002",
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "role": "agent",
+    "avatar": "/uploads/avatar2.jpg",
+    "online": false
+  },
+  {
+    "_id": "usr_003",
+    "name": "Mike Johnson",
+    "email": "mike@example.com",
+    "role": "merchant",
+    "avatar": "/uploads/avatar3.jpg",
+    "online": true
+  },
+  {
+    "_id": "usr_004",
+    "name": "Sarah Williams",
+    "email": "sarah@example.com",
+    "role": "designer",
+    "avatar": "/uploads/avatar4.jpg",
+    "online": true
+  },
+  {
+    "_id": "usr_005",
+    "name": "Admin User",
+    "email": "admin@example.com",
+    "role": "admin",
+    "avatar": "/uploads/avatar5.jpg",
+    "online": true
+  }
+]

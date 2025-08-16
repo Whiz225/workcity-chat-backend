@@ -1,0 +1,83 @@
+[
+  {
+    "_id": "msg_011",
+    "conversation": "conv_001",
+    "sender": "usr_001",
+    "content": "Hello, I need help with my order",
+    "read": false,
+    "createdAt": "2023-10-15T09:31:00Z"
+  },
+  {
+    "_id": "msg_012",
+    "conversation": "conv_001",
+    "sender": "usr_002",
+    "content": "Sure, what's your order number?",
+    "read": false,
+    "createdAt": "2023-10-15T09:32:00Z"
+  },
+  {
+    "_id": "msg_013",
+    "conversation": "conv_001",
+    "sender": "usr_001",
+    "content": "It's #ORD-10025",
+    "read": true,
+    "createdAt": "2023-10-15T09:33:00Z"
+  },
+  {
+    "_id": "msg_014",
+    "conversation": "conv_002",
+    "sender": "usr_003",
+    "content": "Your design mockup is ready",
+    "read": true,
+    "attachment": "/uploads/design.jpg",
+    "createdAt": "2023-10-16T11:46:00Z"
+  },
+  {
+    "_id": "msg_015",
+    "conversation": "conv_001",
+    "sender": "usr_002",
+    "content": "I've located your order, it will ship tomorrow",
+    "read": false,
+    "createdAt": "2023-10-15T09:35:00Z"
+  },
+  {
+    "_id": "msg_016",
+    "conversation": "conv_002",
+    "sender": "usr_001",
+    "content": "Thanks! The design looks great",
+    "read": true,
+    "createdAt": "2023-10-16T11:50:00Z"
+  },
+  {
+    "_id": "msg_017",
+    "conversation": "conv_003",
+    "sender": "usr_004",
+    "content": "Can we schedule a call about the project?",
+    "read": false,
+    "createdAt": "2023-10-17T14:21:00Z"
+  },
+  {
+    "_id": "msg_018",
+    "conversation": "conv_004",
+    "sender": "usr_005",
+    "content": "System maintenance scheduled for Friday",
+    "read": false,
+    "createdAt": "2023-10-18T10:16:00Z"
+  },
+  {
+    "_id": "msg_019",
+    "conversation": "conv_003",
+    "sender": "usr_002",
+    "content": "How about tomorrow at 2pm?",
+    "read": true,
+    "createdAt": "2023-10-17T14:25:00Z"
+  },
+  {
+    "_id": "msg_020",
+    "conversation": "conv_005",
+    "sender": "usr_005",
+    "content": "Welcome to our group chat!",
+    "read": true,
+    "createdAt": "2023-10-19T16:31:00Z"
+  }
+]
