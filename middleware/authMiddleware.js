@@ -11,6 +11,9 @@ exports.getMe = (req, res, next) => {
 };
 
 exports.protect = catchAsync(async (req, res, next) => {
+  console.log("token1", req?.headers?.authorization);
+  console.log("token2", req.cookies?.jwt);
+  console.log("token3", req.params?.token);
   let token;
   if (
     req.headers.authorization &&

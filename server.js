@@ -33,8 +33,8 @@ const io = socketio(server, {
     origin: process.env.CLIENT_URL || "http://localhost:3000",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    optionsSuccessStatus: 200,
+    allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
+    exposedHeaders: ["Set-Cookie"],
   },
 });
 
@@ -82,6 +82,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/chat", require("./routes/chatRoutes"));
+app.use("/api/admin", require("./routes/adminRoutes"));
 
 // Error handling middleware
 app.use(globalErrorHandler);

@@ -68,18 +68,97 @@ exports.getMessages = catchAsync(async (req, res, next) => {
   });
 });
 
+// exports.sendMessage = catchAsync(async (req, res) => {
+
+//   console.log("Sending", req.body, req.files?.attachment)
+//   const { conversation, content } = req.body;
+//   let attachment;
+
+//   if (req.files?.attachment) {
+//     const file = req.files.attachment;
+//     const uploadPath = path.join(__dirname, "../uploads", file.name);
+
+//     await file.mv(uploadPath);
+//     attachment = `/uploads/${file.name}`;
+//   }
+
+//   console.log("DDD")
+
+//   const message = new Message({
+//     conversation,
+//     sender: req.user._id,
+//     content,
+//     attachment,
+//   });
+//   await message.save();
+
+//   console.log("DDD222")
+
+//   const updatedConversation = await Conversation.findByIdAndUpdate(
+//     conversation,
+//     {
+//       lastMessage: message._id,
+//       $inc: { unreadCount: 1 },
+//     },
+//     { new: true }
+//   ).populate("participants");
+
+//   console.log("DDD333")
+
+//   const otherParticipants = updatedConversation.participants.filter(
+//     (p) => p._id.toString() !== req.user._id.toString()
+//   );
+
+//   console.log("DDD444")
+
+//   otherParticipants.forEach(async (user) => {
+//     if (user.notificationPreferences?.email) {
+//       await sendEmailNotification({
+//         to: user.email,
+//         subject: "New message received",
+//         text: `You have a new message from ${req.user.name}`,
+//       });
+//     }
+//   });
+
+//   console.log("DDD555")
+
+//   req.app.get("io").to(conversation).emit("message", message);
+
+//   console.log("DDD666")
+
+//   res.status(201).json({ status: "success", data: message });
+// });
+
 exports.sendMessage = catchAsync(async (req, res) => {
   const { conversation, content } = req.body;
   let attachment;
 
+  console.log("body", req.body);
+  console.log("file", req.file?.attachment);
+
+  // 1. Handle file upload
   if (req.files?.attachment) {
     const file = req.files.attachment;
-    const uploadPath = path.join(__dirname, "../uploads", file.name);
+
+    // Create uploads directory if it doesn't exist
+    const uploadDir = path.join(__dirname, "../uploads");
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+
+    console.log("uploadDir", uploadDir);
+
+    const uniqueFileName = `${Date.now()}-${file.name}`;
+    const uploadPath = path.join(uploadDir, uniqueFileName);
+
+    console.log("fileName", uniqueFileName, uploadPath);
 
     await file.mv(uploadPath);
-    attachment = `/uploads/${file.name}`;
+    attachment = `/uploads/${uniqueFileName}`;
   }
 
+  // 2. Create and save message
   const message = new Message({
     conversation,
     sender: req.user._id,
@@ -88,6 +167,9 @@ exports.sendMessage = catchAsync(async (req, res) => {
   });
   await message.save();
 
+  console.log("message", message);
+
+  // 3. Update conversation
   const updatedConversation = await Conversation.findByIdAndUpdate(
     conversation,
     {
@@ -97,23 +179,41 @@ exports.sendMessage = catchAsync(async (req, res) => {
     { new: true }
   ).populate("participants");
 
+  console.log("updateCon:", updatedConversation);
+
+  // 4. Send notifications
   const otherParticipants = updatedConversation.participants.filter(
     (p) => p._id.toString() !== req.user._id.toString()
   );
 
-  otherParticipants.forEach(async (user) => {
-    if (user.notificationPreferences?.email) {
-      await sendEmailNotification({
-        to: user.email,
-        subject: "New message received",
-        text: `You have a new message from ${req.user.name}`,
-      });
-    }
+  console.log("participants", otherParticipants);
+  await Promise.all(
+    otherParticipants.map(async (user) => {
+      if (user.notificationPreferences?.email) {
+        await sendEmailNotification({
+          to: user.email,
+          subject: "New message received",
+          text: `You have a new message from ${req.user.name}`,
+        });
+      }
+    })
+  );
+
+  // 5. Emit socket event
+  // req.app.get("io").to(conversation).emit("message", message);
+  try {
+    req.app.get("io").to(conversation).emit("message", message);
+  } catch (socketError) {
+    console.error("Socket error:", socketError);
+  }
+
+  console.log("message2", message, conversation);
+
+  // 6. Send response
+  res.status(201).json({
+    status: "success",
+    data: message,
   });
-
-  req.app.get("io").to(conversation).emit("message", message);
-
-  res.status(201).json({ status: "success", data: message });
 });
 
 exports.startTyping = catchAsync(async (req, res) => {
